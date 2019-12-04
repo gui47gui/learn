@@ -1,0 +1,23 @@
+var http = require("http")
+var server = http.createServer()
+var fs = require("fs")
+server.on("request",function(req,res){
+    console.log("网页开启成功！")
+    var url = req.url
+    if(url === "/b"){
+        fs.readFile("./resource/12.jpg",function(error,data){
+            if(error){
+                res.setHeader("Content-Type","text/plain;charset=utf-8")
+                console.log(error)
+                res.end("读取文件失败！")
+            }
+            else{
+                res.setHeader("Content-Type","imag/jpeg")  
+            res.end(data)}
+        })
+
+    }
+})
+server.listen(8000,function(){
+    console.log("成功启动服务器")
+})
